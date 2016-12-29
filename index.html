@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>3d轮播</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+	<ul class="box">
+		<li><img src="img/1.jpg"></li>
+		<li><img src="img/2.jpg"></li>
+		<li><img src="img/3.jpg"></li>
+		<li class="big "><img src="img/4.jpg"></li>
+	</ul>
+	<div class="dot">
+		<ul>
+			<li class="dot-active" data-id="0"></li>
+			<li data-id="1"></li>
+			<li data-id="2"></li>
+			<li data-id="3"></li>
+		</ul>
+	</div>
+</body>
+</html>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script>
+	$(function(){
+		var dot=$('.dot ul'),
+			box=$('.box');
+		dot.css('margin-left',function(){
+			return -$(this).width()/2;
+		});
+		// box.find('li').first().css('left','0');
+		// dot.mouseenter(function(){
+		// 	var index=$(this).attr('data-id');
+		// 	var me=box.eq(index);
+
+		// });
+		dot.click(function(){
+			var me=box.find('[class*="big"]');
+			me.addClass('small').removeClass('big');
+			me.prev('li').addClass('big');
+			me.next('li').removeClass('small');
+		});
+	})
+</script>
