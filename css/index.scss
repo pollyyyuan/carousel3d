@@ -1,87 +1,106 @@
-$boxWidth:762px;
-$boxHeight:200px;
-$imgWidth:540px;
-$imgHeight:190px;
-$dotHeight:26px;
-$dotSpanWidth:17px;
-$dotSpanHeight:2px;
-$dotColor:#C8C8C8;
+$boxHeight:202px;
+$imgHeight:10px;
+@mixin boxing{
+	width: 800px;
+	height:$boxHeight;
+}
+@mixin imging{
+	width: 540px;
+	height:$boxHeight;
+}
+@mixin doting{
+	width: 17px;
+	height: 2px;
+	background-color: #C8C8C8;
+}
 $color:#C62F2F;
-$shadowColor:rgba(0,0,0,.5);
+$shadow:rgba(0,0,0,.5);
 html,body,ul,li{
-	padding:0;
-	margin:0;
-} 
+	padding: 0;
+	margin: 0;
+}
 li{
 	list-style:none;
 }
-.box{
+.content{
 	position: relative;
-	width: $boxWidth;
-	height: $boxHeight; 
-	overflow:hidden;
-	background-color: pink;
+	@include boxing;
+	// overflow:hidden;
 	margin:0 auto;
-	li{
-		position: absolute;
-		top:10px;
-		right:0;
-		width: $imgWidth;
-		height:$imgHeight;
-		&::after{
-			content:'';
-			position: absolute;
-			top:0;
-			left:0;
-			width: 100%;
-			height: 100%;
-			background: $shadowColor;
-			// display:none;
-		}
-		img{
-			width: 100%;
-		}
-		transition:transform 1s;
-
-	}
-}
-.dot{
-	width: $boxWidth;
-	height: $dotHeight;
-	position: relative;
-	margin:0 auto;
-	ul{
-		position: absolute;
-		top:($dotHeight - $dotSpanHeight)/2;
-		left:$boxWidth/2;
-		height: $dotSpanHeight;
+	.box{
+		position: relative;
+		@include boxing;
+		overflow:hidden;
+		// background-color: pink;
 		li{
-			float: left;
-			width: $dotSpanWidth;
-			height: 100%;
-			background-color: $dotColor;
-			margin:	0 2.5px;
-			cursor:	pointer;
+			position: absolute;
+			top:$imgHeight;
+			overflow: hidden;
+			@include imging;
+			border:1px solid rgba(0,0,0,.2);
+			a{
+				display:inline-block;
+				img{
+					width: 100%;
+				}
+			}
+			&::after{
+				content:'';
+				position: absolute;
+				top:0;
+				left:0;
+				right:0;
+				bottom:0;
+				background-color: $shadow;
+				opacity:1;
+			}
+		}
+		.img-active{
+			&::after{
+				content:'';
+				opacity:0;
+			}
+		}
+		.trans{
+			transition:all .5s;
+		}
+	}
+	.dot{
+		width: 100px;
+		margin:15px auto;
+		span{
+			@include doting;
+			display:inline-block;
+			margin:0 2.5px;
 		}
 		.dot-active{
 			background-color: $color;
 		}
 	}
-	
-}
-.big{
-	height:$boxHeight;
-	&::after{
-		display:none;
+	@mixin turn{
+		position: absolute;
+		top: 50%;
+		width: 20px;
+		height: 40px;
+		margin-top:-20px;
+		color: #fff;
+		text-align:center;
+		font:700 20px/40px 'microsoft yahei';
+		cursor:pointer;
+		opacity:0;
+		z-index:99;
+		transition:all 1s;
 	}
-	z-index:2;
-	transform:translate3d(($imgWidth - $boxWidth)/2,$imgHeight - $boxHeight,0);
-}
-.small{
-	height:$imgHeight;
-	&::after{
-		display:block;
+	a.turn-left{
+		@include turn;
+		left:0;
 	}
-	transform:translate3d(($imgWidth - $boxWidth),$boxHeight - $imgHeight,0);
-	
+	a.turn-right{
+		@include turn;
+		right:0;
+	}
+	a:hover{
+		color: $shadow;
+	}
+
 }
