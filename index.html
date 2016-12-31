@@ -6,15 +6,16 @@
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
-	<div class="content">
-		<ul class="box" id="box">
+	<div class="content" id="content">
+		<ul class="box" >
 			<li class="c0"><a href="#"><img src="img/1.jpg"></a></li>
 			<li class="c1"><a href="#"><img src="img/2.jpg"></a></li>
 			<li class="c2"><a href="#"><img src="img/3.jpg"></a></li>
 			<li class="c3"><a href="#"><img src="img/4.jpg"></a></li>
+			<li class="c4"><a href="#"><img src="img/5.jpg"></a></li>
 		</ul>
-		<div class="dot" id="dot">
-			
+		<div class="dotBox">
+			<div id="dot"></div>
 		</div>
 		<a class="turn-left" id="left"><</a>
 		<a class="turn-right" id="right">></a>
@@ -25,8 +26,8 @@
 <script src="js/jquery.carousel3d.js"></script>
 <script>
 	var dom={
-		box:$('#box'),
-		imgBox:$('#box li'),
+		box:$('#content'),
+		imgBox:$('#content li'),
 		dotBox:$('#dot'),
 		leftBtn:$('#left'),
 		rightBtn:$('#right')

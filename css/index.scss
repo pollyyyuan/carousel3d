@@ -1,12 +1,14 @@
 $boxHeight:202px;
-$imgHeight:10px;
+$boxWidth:800px;
+$imgWidth:540px;
+// $turnHeight:60px;
 @mixin boxing{
-	width: 800px;
+	width: $boxWidth;
 	height:$boxHeight;
 }
 @mixin imging{
-	width: 540px;
-	height:$boxHeight;
+	width: $imgWidth;
+	height:$boxHeight - 2;
 }
 @mixin doting{
 	width: 17px;
@@ -25,17 +27,19 @@ li{
 .content{
 	position: relative;
 	@include boxing;
-	// overflow:hidden;
-	margin:0 auto;
+	margin:100px auto;
 	.box{
 		position: relative;
-		@include boxing;
+		width: 100%;
+		height: 100%;
 		overflow:hidden;
-		// background-color: pink;
+//		background-color: pink;
 		li{
 			position: absolute;
-			top:$imgHeight;
+			top: 15px;
+			left: ($boxWidth - $imgWidth)/2;
 			overflow: hidden;
+			z-index:1;
 			@include imging;
 			border:1px solid rgba(0,0,0,.2);
 			a{
@@ -52,7 +56,8 @@ li{
 				right:0;
 				bottom:0;
 				background-color: $shadow;
-				opacity:1;
+				opacity:.8;
+				transition:all .5s;
 			}
 		}
 		.img-active{
@@ -65,30 +70,44 @@ li{
 			transition:all .5s;
 		}
 	}
-	.dot{
-		width: 100px;
+	.dotBox{
+		width: 100%;
+		height: 30px;
 		margin:15px auto;
-		span{
+		position: relative;
+		#dot{
+			position: absolute;
+			left:50%;
+			span{
 			@include doting;
 			display:inline-block;
 			margin:0 2.5px;
-		}
-		.dot-active{
+			cursor:pointer;
+			}
+			.dot-active{
 			background-color: $color;
 		}
+		}
+		
 	}
+		
+
 	@mixin turn{
 		position: absolute;
-		top: 50%;
-		width: 20px;
-		height: 40px;
-		margin-top:-20px;
+		top: 15px;
+		width: ($boxWidth - $imgWidth)/2;
+		height: $boxHeight - 15;
+		// margin-top:-$turnHeight/2;
 		color: #fff;
-		text-align:center;
-		font:700 20px/40px 'microsoft yahei';
+		text-align:left;
+		box-sizing:border-box;
+		padding:5px;
+		font:700 30px/60px 'microsoft yahei';
+		line-height:$boxHeight;
 		cursor:pointer;
 		opacity:0;
 		z-index:99;
+		// background-color: $shadow;
 		transition:all 1s;
 	}
 	a.turn-left{
@@ -97,10 +116,12 @@ li{
 	}
 	a.turn-right{
 		@include turn;
+		text-align:right;
 		right:0;
 	}
 	a:hover{
-		color: $shadow;
+		// background-color: transparent;
+		color:$shadow;
 	}
 
 }
