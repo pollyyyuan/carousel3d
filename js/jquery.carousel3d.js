@@ -37,6 +37,7 @@
 		me.initDot();
 		//初始化方法
 		me.initEvent();
+		me.autoPlay();
 	},
 	//初始化img位置
 	initBox:function(){
@@ -120,6 +121,17 @@
 			me.move(dom[2],1);
 			me.move(dom[3],0);
 		}
+		
+	},
+	autoPlay:function(){
+		var me=this;
+		me.timer=setInterval(function(){
+			me.key++;
+			me.key=(me.key>me.imgNum-1)?0:me.key;
+			me.activeDot(me.dotBox.find('span').eq(me.key));
+			me.animateDIY();
+			me.lastIndex++;
+		},5000);
 		
 	}
 	,
